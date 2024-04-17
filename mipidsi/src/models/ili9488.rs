@@ -89,12 +89,12 @@ where
 
     // dcs.write_raw(0x3a, &[0x55])?; // set 16-bit pixel display
 
-    // NOTE: manually setting memory access data control, ignoring passed in
+    // set display function control
     let _l2r_u2d = 0x22; // blank
     let _d2u_l2r = 0x62; // blank
     let r2l_d2u = 0x42; // worked
     let u2d_r2l = 0x02; // looked same
-    dcs.write_raw(0xB6, &[0b0000_0000, r2l_d2u])?; // L2R_U2D
+    dcs.write_raw(0xB6, &[0b0010_0000, r2l_d2u, 0x3b])?;
 
     dcs.write_command(EnterNormalMode)?; // turn to normal mode
     dcs.write_command(SetDisplayOn)?; // turn on display
